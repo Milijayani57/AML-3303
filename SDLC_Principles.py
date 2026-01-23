@@ -39,31 +39,31 @@ print("Max:", max_num)
 
 ## Step 2: Refactored Code (With Principles)
 
-import random
-from typing import List
+# import random
+# from typing import List
 
-def generate_numbers(count: int, lower: int = 1, upper: int = 100) -> List[int]:
-    """Generate a list of random integers."""
-    return [random.randint(lower, upper) for _ in range(count)]
+# def generate_numbers(count: int, lower: int = 1, upper: int = 100) -> List[int]:
+#     """Generate a list of random integers."""
+#     return [random.randint(lower, upper) for _ in range(count)]
 
-def calculate_average(numbers: List[int]) -> float:
-    """Return the average of a list of numbers."""
-    if not numbers:
-        raise ValueError("List of numbers cannot be empty")
-    return sum(numbers) / len(numbers)
+# def calculate_average(numbers: List[int]) -> float:
+#     """Return the average of a list of numbers."""
+#     if not numbers:
+#         raise ValueError("List of numbers cannot be empty")
+#     return sum(numbers) / len(numbers)
 
-def find_max(numbers: List[int]) -> int:
-    """Return the maximum number from a list."""
-    if not numbers:
-        raise ValueError("List of numbers cannot be empty")
-    return max(numbers)
+# def find_max(numbers: List[int]) -> int:
+#     """Return the maximum number from a list."""
+#     if not numbers:
+#         raise ValueError("List of numbers cannot be empty")
+#     return max(numbers)
 
-if __name__ == "__main__":
-    # Example workflow (can be reused in other projects)
-    nums = generate_numbers(10)
-    print("Generated numbers:", nums)
-    print("Average:", calculate_average(nums))
-    print("Max:", find_max(nums))
+# if __name__ == "__main__":
+#     # Example workflow (can be reused in other projects)
+#     nums = generate_numbers(10)
+#     print("Generated numbers:", nums)
+#     print("Average:", calculate_average(nums))
+#     print("Max:", find_max(nums))
 
 # """
 # ✅ Improvements:
@@ -90,18 +90,18 @@ if __name__ == "__main__":
 import pandas as pd
 
 # Load CSV
-df = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+# df = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
 
-# Print average sepal length
-avg = df['sepal_length'].mean()
-print("Average sepal length:", avg)
+# # Print average sepal length
+# avg = df['sepal_length'].mean()
+# print("Average sepal length:", avg)
 
-# Print max petal width
-mx = df['petal_width'].max()
-print("Max petal width:", mx)
+# # Print max petal width
+# mx = df['petal_width'].max()
+# print("Max petal width:", mx)
 
-# Filter rows where species is setosa
-print(df[df['species'] == 'setosa'].head())
+# # Filter rows where species is setosa
+# print(df[df['species'] == 'setosa'].head())
 
 
 
@@ -120,47 +120,43 @@ print(df[df['species'] == 'setosa'].head())
 # No documentation → not good for collaboration.
 # ""
 
-import random
-from typing import List
+"""Iris Dataset Analysis - Clean and modular version"""
+
+import pandas as pd
 
 
-def generate_numbers(count: int, start: int = 1, end: int = 100) -> List[int]:
-    """
-    Generates a list of random integers.
-    """
-    if count <= 0:
-        raise ValueError("Count must be greater than zero")
-    return [random.randint(start, end) for _ in range(count)]
+def load_data(url):
+    """Load CSV from URL with error handling."""
+    try:
+        return pd.read_csv(url)
+    except Exception as e:
+        print(f"Error loading data: {e}")
+        return None
 
 
-def calculate_average(numbers: List[int]) -> float:
-    """
-    Calculates the average of a list of numbers.
-    """
-    if not numbers:
-        raise ValueError("List is empty")
-    return sum(numbers) / len(numbers)
+def get_column_stat(df, column, stat='mean'):
+    """Calculate statistics for a column safely."""
+    if column not in df.columns:
+        print(f"Column '{column}' not found. Available: {list(df.columns)}")
+        return None
+    return df[column].mean() if stat == 'mean' else df[column].max()
 
 
-def find_max(numbers: List[int]) -> int:
-    """
-    Returns the maximum number from a list.
-    """
-    if not numbers:
-        raise ValueError("List is empty")
-    return max(numbers)
+def filter_species(df, species, n=5):
+    """Filter by species and return top n rows."""
+    return df[df['species'] == species].head(n)
 
 
-def main():
-    numbers = generate_numbers(10)
-    print("Generated numbers:", numbers)
-
-    average = calculate_average(numbers)
-    maximum = find_max(numbers)
-
-    print("Average:", average)
-    print("Max:", maximum)
-
-
+# Main analysis
 if __name__ == "__main__":
-    main()
+    url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
+    
+    df = load_data(url)
+    if df is not None:
+        avg = get_column_stat(df, 'sepal_length', 'mean')
+        mx = get_column_stat(df, 'petal_width', 'max')
+        
+        print(f"Average sepal length: {avg:.2f}")
+        print(f"Max petal width: {mx:.2f}")
+        print("\nSetosa flowers:")
+        print(filter_species(df, 'setosa'))
