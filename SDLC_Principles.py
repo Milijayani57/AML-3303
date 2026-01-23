@@ -120,3 +120,47 @@ print(df[df['species'] == 'setosa'].head())
 # No documentation → not good for collaboration.
 # ""
 
+import random
+from typing import List
+
+
+def generate_numbers(count: int, start: int = 1, end: int = 100) -> List[int]:
+    """
+    Generates a list of random integers.
+    """
+    if count <= 0:
+        raise ValueError("Count must be greater than zero")
+    return [random.randint(start, end) for _ in range(count)]
+
+
+def calculate_average(numbers: List[int]) -> float:
+    """
+    Calculates the average of a list of numbers.
+    """
+    if not numbers:
+        raise ValueError("List is empty")
+    return sum(numbers) / len(numbers)
+
+
+def find_max(numbers: List[int]) -> int:
+    """
+    Returns the maximum number from a list.
+    """
+    if not numbers:
+        raise ValueError("List is empty")
+    return max(numbers)
+
+
+def main():
+    numbers = generate_numbers(10)
+    print("Generated numbers:", numbers)
+
+    average = calculate_average(numbers)
+    maximum = find_max(numbers)
+
+    print("Average:", average)
+    print("Max:", maximum)
+
+
+if __name__ == "__main__":
+    main()
