@@ -1,0 +1,9 @@
+boto3==1.42.78
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.5.1
+xgboost==3.2.0
+mlflow==3.10.1
+matplotlib==3.9.2
+seaborn==0.13.2
+jupyter==1.0.0

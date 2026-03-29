@@ -1,0 +1,25 @@
+# Large dataset files
+data/
+*.csv
+
+# MLflow artifacts - both locations
+mlruns/
+mlflow.db
+
+# Temporary files
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Anaconda
+.conda/
+
+# AWS credentials
+.aws/
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+desktop.ini
