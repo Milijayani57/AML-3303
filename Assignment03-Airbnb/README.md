@@ -46,8 +46,8 @@ airbnb-price-prediction/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/airbnb-price-prediction.git
-cd airbnb-price-prediction
+git clone https://github.com/Milijayani57/AML-3303.git
+cd AML-3303
 ```
 
 ### 2. Install Dependencies
