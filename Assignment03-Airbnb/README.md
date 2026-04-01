@@ -61,11 +61,9 @@ aws configure
 ```
 Enter your AWS Access Key ID, Secret Access Key, region (`us-east-2`), and output format (`json`).
 
-### 4. Run Notebooks in Order
+### 4. Run Notebook
 ```
-1. notebooks/data_ingestion.ipynb
-2. notebooks/EDA_Preprocessing.ipynb
-3. notebooks/Modeling_MLflow.ipynb
+Airbnb_price_prediction_pipeline.ipynb
 ```
 
 ### 5. Launch MLflow UI
