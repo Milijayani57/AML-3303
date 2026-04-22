@@ -2,7 +2,7 @@
 
 **Title:** Crisis Alert System — Social Media Crisis Detection Using BERT + LSTM + LDA Ensemble  
 **Course:** AML-3203 Business Applications of ML in Social Media  
-**Group Members:** Mili Jayani (c0959067) · Nafis Ahmed (c0959671) · Jans Alzate-Morales (c0936855)  
+**Group Members:** Nafis Ahmed (c0959671) · Jans Alzate-Morales (c0936855)  · Mili Jayani (c0959067)  
 **Date:** April 2026
 
 ---
@@ -480,34 +480,4 @@ The project was managed in Jira under project key **SAACC** using a sprint-based
 | LDA | Topics (k) / Passes / Coherence | 5 / 15 / 0.5882 |
 | Ensemble | BERT / LSTM / LDA weights | 0.40 / 0.40 / 0.20 |
 
-### Appendix D — Chart Index
 
-| Chart | Filename | Notebook |
-|---|---|---|
-| Label distribution | `01_label_distribution.png` | 01 |
-| Tweet length | `02_tweet_length.png` | 01 |
-| Top keywords | `03_top_keywords.png` | 01 |
-| Word frequencies | `04_top_words.png` | 01 |
-| Word clouds | `05_wordclouds.png` | 01 |
-| Vocabulary overlap | `06_vocab_overlap.png` | 01 |
-| BERT validation | `07_bert_validation.png` | 02 |
-| BERT score dist. | `08_bert_score_dist.png` | 02 |
-| LDA coherence | `09_lda_coherence.png` | 04 |
-| LDA topic bars | `10_lda_topics.png` | 04 |
-| LDA score dist. | `11_lda_scores.png` | 04 |
-| Climate time-series | `12_climate_timeseries.png` | 03 |
-| LSTM labels scatter | `12_lstm_labels.png` | 03 |
-| LSTM hourly | `12b_lstm_timeseries.png` | 03 |
-| LSTM ROC | `13_lstm_validation.png` | 03 |
-| Alert distribution | `14_alert_distribution.png` | 05 |
-| Ensemble validation | `15_ensemble_validation.png` | 05 |
-| Model contributions | `16_model_contributions.png` | 05 |
-| Submission EDA | `00_submission_eda.png` | 06 |
-| Submission LSTM | `00_submission_lstm.png` | 06 |
-| Submission ROC | `00_submission_roc.png` | 06 |
-| Submission alerts | `00_submission_alerts.png` | 06 |
-| Submission demo | `00_submission_demo.png` | 06 |
-
----
-
-*End of Report*
