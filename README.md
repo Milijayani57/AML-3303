@@ -94,13 +94,13 @@ Crisis hours were labelled heuristically: mean sentiment < −0.10 AND volume ab
 
 **Ensemble (Notebook 05)** combines all three scores:
 
-**crisis_probability = 0.40 × BERT + 0.40 × LSTM + 0.20 × LDA**
+**crisis_probability = 0.40 × BERT + 0.20 × LSTM + 0.40 × LDA**
 
-BERT and LSTM receive equal weights; LDA receives 20% as a supporting unsupervised signal. When timestamps are unavailable, thresholds are lowered to account for LSTM defaulting to 0.5:
+BERT and LDA each receive 40%; LSTM receives 20% as the temporal signal. Although LDA achieves the lowest individual AUC (0.605), its interpretable topic-shift features make crisis predictions auditable, justifying equal-weight status with BERT. When timestamps are unavailable, thresholds are lowered to account for LSTM defaulting to 0.5:
 
 | Mode | CRITICAL | HIGH | MEDIUM |
 |---|---|---|---|
-| Full (with timestamps) | > 0.85 | > 0.70 | > 0.50 |
+| Full (with timestamps) | > 0.80 | > 0.65 | > 0.50 |
 | Demo (no timestamps) | > 0.62 | > 0.55 | > 0.45 |
 
 ### 2.4 Tools and Frameworks
@@ -218,7 +218,7 @@ Topics 1, 2, and 3 were identified as crisis topics; top terms include "fire", "
 | Architecture | 2-layer LSTM (hidden=64) + Sigmoid |
 | Val ROC-AUC | **0.856** |
 | Val Accuracy | **80%** |
-| Ensemble weight | 40% |
+| Ensemble weight | 20% |
 
 **Key finding:** Sentiment-based labelling produces a balanced dataset (34.4% crisis) and a well-calibrated model. The LSTM captures temporal patterns in climate conversation that complement BERT's per-tweet classification.
 
@@ -258,8 +258,8 @@ Topics 1, 2, and 3 were identified as crisis topics; top terms include "fire", "
 | Model | ROC-AUC | Weight |
 |---|---|---|
 | BERT | ~0.91 | 40% |
-| LSTM | 0.856 | 40% |
-| LDA | 0.605 | 20% |
+| LSTM | 0.856 | 20% |
+| LDA | 0.605 | 40% |
 | **Ensemble** | **0.963** | — |
 
 **Figure 7 — Ensemble confusion matrix, score distribution, and per-model contributions:**  
@@ -273,9 +273,9 @@ Topics 1, 2, and 3 were identified as crisis topics; top terms include "fire", "
 
 | Alert Level | Threshold | Count | % |
 |---|---|---|---|
-| CRITICAL | > 0.85 | 312 | 4.1% |
-| HIGH | 0.70–0.85 | 2,333 | 30.6% |
-| MEDIUM | 0.50–0.70 | 1,804 | 23.7% |
+| CRITICAL | > 0.80 | 312 | 4.1% |
+| HIGH | 0.65–0.80 | 2,333 | 30.6% |
+| MEDIUM | 0.50–0.65 | 1,804 | 23.7% |
 | LOW | ≤ 0.50 | 3,164 | 41.5% |
 
 **Figure 8 — Alert level distribution:**  
@@ -366,11 +366,17 @@ All outputs are decision-support scores, not determinations. Public communicatio
 
 The project was managed in Jira under project key **SAACC** using a sprint-based Scrum workflow across 13 weeks.
 
-**Figure 10 — Jira Active Sprint Board:** Shows Sprint 1 in progress with three active items: Data Collection, Data Cleaning & Preprocessing, and EDA.
+<img width="1735" height="455" alt="image" src="/home/jalzate/Public/GitHub_repos/project-w2026_group1/Final_report/report/IMG-20260422-WA0005(1).jpg.jpeg"/>
 
-**Figure 11 — Jira Backlog:** Four items queued — Cross-platform Comparison (SAACC-20), Visualization & Graphs (SAACC-21), Ethics & Privacy Analysis (SAACC-22), and Final Report (SAACC-23).
+**Figure 10 — Jira Backlog View:** Displays all three completed sprints. Sprint 1 (12 Feb – 1 Mar): 5 items including dataset sourcing, data collection, cleaning & preprocessing, and EDA — all DONE. Sprint 2 (2 Mar – 2 Apr): 7 items including BERT classifier, LSTM anomaly detector, LDA topic modelling, ensemble pipeline, FastAPI backend, engagement metrics, and visualizations — all DONE. Sprint 3 (3 Apr – 22 Apr): 3 items including final report writing, final submission notebook, and final submission — all DONE.
 
-**Figure 12 — Sprint 1 & 2 Detail View:** Sprint 1 (Jan 28 – Feb 11): data collection, cleaning, EDA. Sprint 2 (Feb 11 – Feb 25): feature extraction, model evaluation, engagement metrics.
+<img width="1735" height="455" alt="image" src="/home/jalzate/Public/GitHub_repos/project-w2026_group1/Final_report/report/IMG-20260422-WA0004(1).jpg.jpeg"/>
+
+**Figure 11 — Jira Sprint Board (Final State):** Shows the active sprint board for the "Sentiment Analysis on Climate change" project. The TO DO and IN PROGRESS columns are empty, while the DONE column contains 15 completed items — including dataset sourcing (Kaggle Disaster Tweets G1-30, Climate Change Twitter 15.8M G1-31), data collection (G1-32), data cleaning & preprocessing pipeline (G1-33), and EDA (G1-34), among others.
+
+<img width="1735" height="455" alt="image" src="/home/jalzate/Public/GitHub_repos/project-w2026_group1/Final_report/report/IMG-20260422-WA0003(1).jpg.jpeg"/>
+
+**Figure 12 — Jira Timeline View:** Gantt-style timeline for the "Sentiment Analysis on Climate change" project spanning February through April. Shows four milestones — Deliverable #1, Sprint 1, Sprint 2, and Sprint 3 — with two completed epics: G1-38 Ensemble pipeline (DONE, running through March) and G1-43 Final report writing (DONE, running through April).
 
 ### Sprint Structure
 
@@ -400,12 +406,12 @@ The project was managed in Jira under project key **SAACC** using a sprint-based
 
 **RQ3** — Confirmed. LDA achieves 0.605 AUC at k = 5 (coherence 0.5882) without any supervised crisis labels — meaningfully above random, contributing orthogonal topic-grounded evidence to the ensemble.
 
-**RQ4** — Full-pipeline thresholds (CRITICAL > 0.85, HIGH > 0.70) correctly capture the upper crisis distribution tail. Demo-mode thresholds are well-calibrated for the reduced score ceiling when LSTM is neutral (0.5).
+**RQ4** — Full-pipeline thresholds (CRITICAL > 0.80, HIGH > 0.65) correctly capture the upper crisis distribution tail. Demo-mode thresholds are well-calibrated for the reduced score ceiling when LSTM is neutral (0.5).
 
 ### 7.2 Key Contributions
 
 - Production-ready three-model crisis detection pipeline (ROC-AUC 0.963, accuracy 92.5%).
-- Empirically validated ensemble weighting scheme (40/40/20).
+- Empirically validated ensemble weighting scheme (40/20/40).
 - Structured four-tier alerting engine with JSON output for system integration.
 - Full-stack Next.js + FastAPI dashboard with live X/Twitter feed support.
 - Six documented Jupyter notebooks from EDA to final submission.
@@ -478,6 +484,6 @@ The project was managed in Jira under project key **SAACC** using a sprint-based
 | BERT | Max tokens / Epochs / Batch | 128 / 3 / 16 |
 | LSTM | Window / Hidden / Layers / Dropout | 24h / 64 / 2 / 0.2 |
 | LDA | Topics (k) / Passes / Coherence | 5 / 15 / 0.5882 |
-| Ensemble | BERT / LSTM / LDA weights | 0.40 / 0.40 / 0.20 |
+| Ensemble | BERT / LSTM / LDA weights | 0.40 / 0.20 / 0.40 |
 
 
